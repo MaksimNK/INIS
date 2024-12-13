@@ -44,7 +44,7 @@ for (let item of divToDrag) {
     event.preventDefault();
     let currentTime = new Date().getTime();
     let difference = currentTime - lastTap;
-
+    console.log(currentTime)
     if (difference < 300) {
       holderItem = item;
       isDragging = true;
