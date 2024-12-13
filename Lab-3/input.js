@@ -66,12 +66,23 @@ workSpace.addEventListener("mousemove", (event) => {
   if (isDragging && holderItem) {
     holderItem.style.left = `${event.clientX - offsetX}px`;
     holderItem.style.top = `${event.clientY - offsetY}px`;
+
+    if (event.shiftKey) {
+      itemSize.width += 1;
+      itemSize.height += 1;
+      holderItem.style.width = `${itemSize.width}px`;
+      holderItem.style.height = `${itemSize.height}px`;
+    }
+
   }
 });
 
 workSpace.addEventListener("touchmove", (event) => {
   event.preventDefault();
   if (isDragging && holderItem) {
+    holderItem.style.left = `${event.touches[0].clientX - offsetX}px`;
+    holderItem.style.top = `${event.touches[0].clientY - offsetY}px`;
+
     let i = 1 * itemSize.direction;
     itemSize.newSquare = (itemSize.width + i) * (itemSize.height + i);
 
@@ -86,16 +97,9 @@ workSpace.addEventListener("touchmove", (event) => {
     } else {
       itemSize.direction *= -1;
     }
-
-    holderItem.style.left = `${event.touches[0].clientX - offsetX}px`;
-    holderItem.style.top = `${event.touches[0].clientY - offsetY}px`;
-    
-    if (isDragging && event.touches.length > 1) {
-      isDragging = false;
-      holderItem = null;
-    }
   }
 });
+
 
 workSpace.addEventListener("touchstart", (event) => {
   event.preventDefault();
